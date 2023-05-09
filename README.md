@@ -1,5 +1,5 @@
 # lua analysis html
-English | [¼òÌåÖĞÎÄ](README-zh_CN.md)
+English | [ç®€ä½“ä¸­æ–‡](README-zh_CN.md)
 
 lua analysis html xss detection
 
