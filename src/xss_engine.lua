@@ -39,6 +39,7 @@ local function is_xss(text)
             for k,v in pairs(e.attributes) do
                 if BLACKATTREVENT[k] then
                     if e.attributes[k] ~="" then
+                        print("BLACKATTREVENT is true")
                         return true
                     end
                 end
@@ -47,6 +48,7 @@ local function is_xss(text)
         -- all tag src check
         if e.attributes["src"]  then
             if string.find(e.attributes["src"],"javascript") then
+                print("src is true")
                 return true
             end
         end
@@ -54,6 +56,7 @@ local function is_xss(text)
         -- all tag href check
         if e.attributes["href"]  then
             if string.find(e.attributes["href"],"javascript") then
+                print("href is true")
                 return true
             end
         end
@@ -61,28 +64,30 @@ local function is_xss(text)
         -- all tag href check
         if e.attributes["action"]  then
             if string.find(e.attributes["action"],"javascript") then
+                print("action is true")
                 return true
             end
         end
-
         -- script tag check
         if e.name=="script" then
             if e.attributes["src"] then
                 --this is src script
+                print("script src is true")
                 return true
-            end
-        end
-            if e:getcontent()~="" then
-                 return true
+            elseif e:getcontent()~="" then
+                --this is inline script
+                print("script inline is true")
+                return true
             end
         end
 
         if e.name=="iframe" then
             if e.attributes["srcdoc"] then
+                print("iframe srcdoc is true")
                 return true
             end
         end
-
+    end
     local limit=100
     local apos=0
     local loop=0
@@ -138,9 +143,9 @@ local function is_xss(text)
                 return true
             end
         end
-       end
-    return false
     end
+    return false
+end
 
 xss_engine.is_xss = is_xss
 return xss_engine
