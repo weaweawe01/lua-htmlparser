@@ -194,7 +194,7 @@ local function parse(text,limit) -- {{{
 			--print("k="..k)
 			--print("start="..start)
 
-			-- ·ÀÖ¹ËÀÑ­»·
+			-- é˜²æ­¢æ­»å¾ªç¯
 			if start>=1 then
 				if (loop>start) then
 					print("true")

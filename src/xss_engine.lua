@@ -105,7 +105,7 @@ local function is_xss(text)
             if not k or k == "/>" or k == ">" then break end
             print("k="..k)
 
-            -- ·ÀÖ¹ËÀÑ­»·
+            -- é˜²æ­¢æ­»å¾ªç¯
             if start>=1 then
                 if (loop>start) then
                     break
