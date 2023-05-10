@@ -3,7 +3,7 @@
 基于  [lua-htmlparser](https://github.com/msva/lua-htmlparser)
 
 ### 有什么作用？
-1.xss 的语法检测 暂未实现
+1.xss 的语法检测
 2.解析 html 标签
 
 ## Examples
