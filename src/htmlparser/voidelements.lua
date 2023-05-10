@@ -38,6 +38,11 @@ return {
 	var=true,
 	input=true,
 	iframe=true,
+	details=true,
+	select=true,
+	isindex=true,
+	form=true,
+	textarea=true,
 
 }
 

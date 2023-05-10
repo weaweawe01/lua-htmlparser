@@ -160,6 +160,7 @@ local function parse(text,limit) -- {{{
 		dbg("[MainLoop]:#LINE# openstart=%s || tpos=%s || name=%s",str(openstart),str(tpos),str(name))
 		-- }}}
 		if not name then break end
+		name=name:lower()
 		-- Some more vars {{{
 		index = index + 1
 		local tag = ElementNode:new(index, str(name), (node or {}), descend, openstart, tpos)
@@ -167,6 +168,7 @@ local function parse(text,limit) -- {{{
 		local tagloop
 		local tagst, apos = tag:gettext(), 1
 		-- }}}
+		local loop=0
 		while true do -- TagLoop {{{
 			dbg("[TagLoop]:#LINE# tag.name=%s, tagloop=%s",str(tag.name),str(tagloop))
 			if tagloop == limit then -- {{{
@@ -176,7 +178,7 @@ local function parse(text,limit) -- {{{
 			-- Attrs {{{
 			local start, k, eq, quote, v, zsp
 			start, apos, k, zsp, eq, zsp, quote = tagst:find(
-					"[%s+|/]" ..         -- some uncaptured space
+					"[%s+|/|\"|']" ..         -- some uncaptured space
 							"([^%s=/>]+)" .. -- k = an unspaced string up to an optional "=" or the "/" or ">"
 							"([%s]-)"..      -- zero or more spaces
 							"(=?)" ..        -- eq = the optional; "=", else ""
@@ -187,7 +189,20 @@ local function parse(text,limit) -- {{{
 			-- }}}
 
 
+
 			if not k or k == "/>" or k == ">" then break end
+			--print("k="..k)
+			--print("start="..start)
+
+			-- ·ÀÖ¹ËÀÑ­»·
+			if start>=1 then
+				if (loop>start) then
+					print("true")
+					break
+				end
+				loop=start
+			end
+
 			-- Pattern {{{
 			if eq == "=" then
 				local pattern = "=([^%s>]*)"
