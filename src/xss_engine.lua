@@ -25,6 +25,15 @@ BLACKATTREVENT["onmouseout"] = true
 BLACKATTREVENT["onmouseover"] = true
 BLACKATTREVENT["onmouseup"] = true
 BLACKATTREVENT["ontoggle"] = true
+BLACKATTREVENT["onfocusout"]=true
+BLACKATTREVENT["onfocusin"]=true
+BLACKATTREVENT["onscroll"]=true
+BLACKATTREVENT["onmouseenter"]=true
+BLACKATTREVENT["onmouseleave"]=true
+BLACKATTREVENT["onmousewheel"]=true
+BLACKATTREVENT["oncontextmenu"]=true
+BLACKATTREVENT["oncopy"]=true
+
 
 local function is_xss(text)
     local root = htmlparser.parse(text)
@@ -39,7 +48,7 @@ local function is_xss(text)
             for k,v in pairs(e.attributes) do
                 if BLACKATTREVENT[k] then
                     if e.attributes[k] ~="" then
-                        print("BLACKATTREVENT is true")
+                        print("BLACKATTREVENT is true "..k)
                         return true
                     end
                 end
@@ -108,7 +117,7 @@ local function is_xss(text)
                             [=[(['"]?)]=],      -- quote = an optional "'" or '"' following the "=", or ""
                     apos)
             if not k or k == "/>" or k == ">" then break end
-            print("k="..k)
+            --print("k="..k)
 
             -- 防止死循环
             if start>=1 then
